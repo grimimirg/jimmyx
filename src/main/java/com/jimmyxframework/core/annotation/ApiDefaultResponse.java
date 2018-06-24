@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
  * @author Andrea_Grimandi
  */
 @Target(METHOD)
-public @interface ApiResponse {
+public @interface ApiDefaultResponse {
 
     /**
      * @return

@@ -7,10 +7,10 @@ import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.jimmyxframework.core.annotation.ApiResponse;
+import com.jimmyxframework.core.annotation.ApiDefaultResponse;
 import com.jimmyxframework.core.annotation.Controller;
 import com.jimmyxframework.core.annotation.RequestMapping;
-import com.jimmyxframework.core.annotation.ResponseSerializeJson;
+import com.jimmyxframework.core.annotation.SerializeJson;
 
 import io.vavr.collection.List;
 import io.vavr.collection.Map;
@@ -100,8 +100,8 @@ public class ApiBuilder {
 
             Controller apiController = service.getClass().getAnnotation(Controller.class);
             RequestMapping apiMapping = method.getAnnotation(RequestMapping.class);
-            ResponseSerializeJson apiSerializeJson = method.getAnnotation(ResponseSerializeJson.class);
-            ApiResponse apiResponse = method.getAnnotation(ApiResponse.class);
+            SerializeJson apiSerializeJson = method.getAnnotation(SerializeJson.class);
+            ApiDefaultResponse apiDefaultResponse = method.getAnnotation(ApiDefaultResponse.class);
 
             if (apiMapping != null) {
                 this.router.routeWithRegex(apiMapping.method(), apiController.path() + apiMapping.path())
@@ -126,8 +126,8 @@ public class ApiBuilder {
                                         });
                             }
 
-                            if (apiResponse != null) {
-                                httpResponse.setStatusCode(apiResponse.status());
+                            if (apiDefaultResponse != null) {
+                                httpResponse.setStatusCode(apiDefaultResponse.status());
                             }
 
                             if (response != null) {
