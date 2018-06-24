@@ -6,17 +6,14 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 
  * @author Andrea_Grimandi
- *
  */
 @Target(ElementType.PARAMETER)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ParamQuery {
 
-	/**
-	 * 
-	 * @return
-	 */
-	String value();
+    /**
+     * @return
+     */
+    String value();
 }

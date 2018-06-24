@@ -8,12 +8,10 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 /**
- * 
  * @author Andrea_Grimandi
- *
  */
 @Retention(RUNTIME)
-@Target({ TYPE, METHOD })
+@Target({TYPE, METHOD})
 public @interface ResponseSerializeJson {
 
 }
