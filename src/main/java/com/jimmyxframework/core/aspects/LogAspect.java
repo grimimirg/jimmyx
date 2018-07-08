@@ -6,6 +6,9 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 
+/**
+ *
+ */
 public class LogAspect {
 
     /**

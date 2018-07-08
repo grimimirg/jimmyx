@@ -18,7 +18,7 @@ public class Server extends AbstractVerticle {
     @Override
     public void start() throws Exception {
         Properties applicationProperties = new Properties();
-        applicationProperties.load(new FileInputStream("app.properties"));
+        applicationProperties.load(new FileInputStream("C:\\_projects\\jimmyx\\src\\test\\resources\\app.properties"));
         new ApiBuilder(vertx, applicationProperties.getProperty("path"))
                 .start(Integer.parseInt(applicationProperties.getProperty("socket")));
     }
@@ -30,7 +30,7 @@ public class Server extends AbstractVerticle {
         Consumer<Vertx> runner = vertx -> {
             vertx.deployVerticle(Server.class.getName());
         };
-
         runner.accept(Vertx.vertx());
     }
+
 }
