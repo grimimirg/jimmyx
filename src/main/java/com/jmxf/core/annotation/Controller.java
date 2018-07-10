@@ -1,4 +1,4 @@
-package com.jimmyxframework.core.annotation;
+package com.jmxf.core.annotation;
 
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.ElementType.TYPE;
@@ -12,6 +12,10 @@ import java.lang.annotation.Target;
  */
 @Retention(RUNTIME)
 @Target({TYPE, METHOD})
-public @interface SerializeJson {
+public @interface Controller {
 
+    /**
+     * @return
+     */
+    String path() default "";
 }

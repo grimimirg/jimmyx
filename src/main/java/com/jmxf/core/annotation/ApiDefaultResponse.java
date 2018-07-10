@@ -1,4 +1,4 @@
-package com.jimmyxframework.core.annotation;
+package com.jmxf.core.annotation;
 
 import static java.lang.annotation.ElementType.METHOD;
 

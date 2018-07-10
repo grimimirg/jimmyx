@@ -1,12 +1,12 @@
-package com.jimmyxframework.core;
+package com.jmxf.core;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 import java.util.Map;
 
-import com.jimmyxframework.core.annotation.ParamBody;
-import com.jimmyxframework.core.annotation.ParamPath;
-import com.jimmyxframework.core.annotation.ParamQuery;
+import com.jmxf.core.annotation.ParamBody;
+import com.jmxf.core.annotation.ParamPath;
+import com.jmxf.core.annotation.ParamQuery;
 
 import io.vavr.Tuple3;
 import io.vavr.collection.List;

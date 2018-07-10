@@ -1,6 +1,6 @@
 package com.test.app;
 
-import com.jimmyxframework.core.Server;
+import com.jmxf.core.Server;
 
 /**
  * @author Andrea_Grimandi

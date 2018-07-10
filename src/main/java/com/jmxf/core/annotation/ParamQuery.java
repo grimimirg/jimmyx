@@ -1,4 +1,4 @@
-package com.jimmyxframework.core.annotation;
+package com.jmxf.core.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -16,4 +16,10 @@ public @interface ParamQuery {
      * @return
      */
     String value();
+
+    /**
+     *
+     * @return
+     */
+    boolean required() default true;
 }

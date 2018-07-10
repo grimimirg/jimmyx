@@ -1,4 +1,4 @@
-package com.jimmyxframework.core;
+package com.jmxf.core;
 
 import java.io.FileInputStream;
 import java.util.Properties;

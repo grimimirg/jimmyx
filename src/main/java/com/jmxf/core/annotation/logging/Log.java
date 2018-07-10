@@ -1,4 +1,4 @@
-package com.jimmyxframework.core.annotation.logging;
+package com.jmxf.core.annotation.logging;
 
 import java.lang.annotation.Target;
 
