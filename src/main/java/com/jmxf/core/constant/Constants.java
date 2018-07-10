@@ -1,20 +1,18 @@
 package com.jmxf.core.constant;
 
 public class Constants {
-	public static final String CODE_NO_RECORDS_FOUND = "0";
-	public static final String MESSAGE_NO_RECORDS_FOUND = "No records found";
 
-	public enum MAIL_TYPES {
-		GENERIC("GENERIC"), PASSWORD_CHANGE("PASSWORD_CHANGE");
+	public enum ERRORS {
+		GENERIC("err");
 
-		private String type;
+		private String msg;
 
-		MAIL_TYPES(String type) {
-			this.type = type;
+		ERRORS(String msg) {
+			this.msg = msg;
 		}
 
-		public String getType() {
-			return this.type;
+		public String get() {
+			return this.msg;
 		}
 
 	}

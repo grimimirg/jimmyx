@@ -19,16 +19,16 @@ public class ApiResponse {
 	public static final int UNAUTHORIZED_CODE = 23;
 	public static final int INVALID_INPUT_VALUE_CODE = 55;
 
-	public static final String OK = "OK";
-	public static final String INTERNAL_SERVER_ERROR = "Internal server error";
-	public static final String MISSING_PARAMETER = "Required parameter missing";
-	public static final String MISSING_CLIENT_ID_HEADER = "The request doesn't contain a correct header with the client id";
-	public static final String MISSING_JWT_HEADER = "JWT token missing in the request";
-	public static final String INVALID_JWT_TOKEN = "The request contains an invalid JWT token";
-	public static final String EXPIRED_JWT_TOKEN = "The request contains an expired JWT token";
-	public static final String NOT_FOUND = "The content requested can't be found";
-	public static final String UNAUTHORIZED = "User unauthorized";
-	public static final String INVALID_INPUT_VALUE = "Invalid input value";
+	private static final String OK = "OK";
+	private static final String INTERNAL_SERVER_ERROR = "Internal server error";
+	private static final String MISSING_PARAMETER = "Required parameter missing";
+	private static final String MISSING_CLIENT_ID_HEADER = "The request doesn't contain a correct header with the client id";
+	private static final String MISSING_JWT_HEADER = "JWT token missing in the request";
+	private static final String INVALID_JWT_TOKEN = "The request contains an invalid JWT token";
+	private static final String EXPIRED_JWT_TOKEN = "The request contains an expired JWT token";
+	private static final String NOT_FOUND = "The content requested can't be found";
+	private static final String UNAUTHORIZED = "User unauthorized";
+	private static final String INVALID_INPUT_VALUE = "Invalid input value";
 
 	public ApiResponse() {
 	}

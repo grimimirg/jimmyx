@@ -6,11 +6,15 @@ import org.reflections.Reflections;
 import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jmxf.core.annotation.ApiDefaultResponse;
 import com.jmxf.core.annotation.Controller;
 import com.jmxf.core.annotation.RequestMapping;
 import com.jmxf.core.annotation.SerializeJson;
+import com.jmxf.core.constant.ApiResponse;
+import com.jmxf.core.constant.Constants;
+import com.jmxf.core.exception.ApiException;
 
 import io.vavr.collection.List;
 import io.vavr.collection.Map;
@@ -106,28 +110,56 @@ public class ApiBuilder {
 			if (apiMapping != null) {
 				this.router.routeWithRegex(apiMapping.method(), apiController.path() + apiMapping.path())
 						.handler(context -> {
-							Object apiResult = Try
-									.of(() -> new InvocationHelper().invokeMethod(service, method, context))
-									.getOrElseGet(exceptionProvider -> exceptionProvider.getCause().getMessage());
-
-							String response = null;
-							if (apiSerializeJson != null) {
-								response = Try.of(() -> new ObjectMapper().writeValueAsString(apiResult))
-										.getOrElse(new String());
-							}
-
 							HttpServerResponse httpResponse = context.response();
 
-							if (!apiMapping.headers().equals("")) {
-								List.of(apiMapping.headers().split(";")).map(element -> Map
-										.entry(element.split("=")[0].trim(), element.split("=")[1].trim()))
-										.forEach(tuple -> {
-											httpResponse.putHeader(tuple._1(), tuple._2());
-										});
-							}
+							// NB: code here will be executed for each controller's invocation
 
-							if (apiDefaultResponse != null) {
-								httpResponse.setStatusCode(apiDefaultResponse.status());
+							// invokes the controller function corresponding to the @RequestMapping
+							Object apiResult = Try
+									.of(() -> new InvocationHelper().invokeMethod(service, method, context))
+									.getOrElseGet(exceptionProvider -> exceptionProvider.getCause());
+
+							// response may be also an exception so it is handled like if it was a normal
+							// response result avoiding to show any back-end error/stack trace (for
+							// security)
+							String response = null;
+
+							if (apiResult instanceof ApiException) {
+
+								// any instace of ApiException thrown will be always serialized into a json
+								response = Try
+										.of(() -> new ObjectMapper()
+												.writeValueAsString(((ApiException) apiResult).getMessage()))
+										.getOrElse(Constants.ERRORS.GENERIC.get());
+
+								// in case of ApiException response is forced to a JSON
+								httpResponse.putHeader("Content-Type", "application/json");
+
+							} else {
+
+								if (apiSerializeJson != null) {
+									// in case of a declared json response by @SerializeJson, response will be
+									// serialized into a JSON.
+									response = Try.of(() -> new ObjectMapper().writeValueAsString(apiResult))
+											.getOrElse(Try
+													.of(() -> new ObjectMapper().writeValueAsString(
+															new ApiResponse(ApiResponse.INTERNAL_SERVER_ERROR_CODE)))
+													.getOrElse(Constants.ERRORS.GENERIC.get()));
+								}
+
+								// in case of no exception headers are taken from @RequestMapping
+								if (!apiMapping.headers().equals("")) {
+									List.of(apiMapping.headers().split(";")).map(element -> Map
+											.entry(element.split("=")[0].trim(), element.split("=")[1].trim()))
+											.forEach(tuple -> {
+												httpResponse.putHeader(tuple._1(), tuple._2());
+											});
+								}
+
+								// the default status code
+								if (apiDefaultResponse != null) {
+									httpResponse.setStatusCode(apiDefaultResponse.status());
+								}
 							}
 
 							if (response != null) {
