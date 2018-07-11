@@ -12,8 +12,9 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ParamPath {
 
-    /**
-     * @return
-     */
-    String value();
+	/**
+	 * @return
+	 */
+	String value();
+
 }

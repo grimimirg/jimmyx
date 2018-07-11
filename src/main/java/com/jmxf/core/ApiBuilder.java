@@ -6,7 +6,6 @@ import org.reflections.Reflections;
 import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jmxf.core.annotation.ApiDefaultResponse;
 import com.jmxf.core.annotation.Controller;

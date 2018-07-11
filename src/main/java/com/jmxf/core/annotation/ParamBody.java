@@ -11,9 +11,4 @@ import java.lang.annotation.Target;
 @Target(ElementType.PARAMETER)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ParamBody {
-
-    /**
-     * @return
-     */
-    String value();
 }
