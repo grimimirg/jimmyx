@@ -7,11 +7,11 @@ import com.jmxf.core.Server;
  */
 public class Startup {
 
-    /**
-     * @param args
-     */
-    public static void main(String[] args) {
-        new Server().startup();
-    }
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		new Server().startup();
+	}
 
 }
